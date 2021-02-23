@@ -1,5 +1,5 @@
 const DB = require("../db");
-const { errorResponse, getImportantDataFromNoteObject } = require("../functions");
+const { errorResponse } = require("../functions");
 
 module.exports = async (req, res) => {
 	const note = await DB.Note.findById(req.params.id);
