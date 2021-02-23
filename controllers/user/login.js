@@ -1,5 +1,5 @@
 const DB = require("../db");
-const { errorResponse, generateToken } = require("../functions");
+const { errorResponse, generateToken, hashPassword } = require("../functions");
 const Crypto = require("crypto");
 
 module.exports = async (req, res) => {
@@ -13,13 +13,8 @@ module.exports = async (req, res) => {
 			"email"
 		)
 	}
-
-	const hashedPassword = Crypto
-		.createHash("sha256")
-		.update(req.body.password, "binary")
-		.digest("hex");
 	
-	if (hashedPassword != user.password) {
+	if (hashPassword(req.body.password) != user.password) {
 		return errorResponse(
 			res,
 			null,

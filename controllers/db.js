@@ -14,7 +14,6 @@ const userSchema = new Schema({
 	token: {
 		type: "string",
 		required: true,
-		type: String,
 		trim: true,
 		index: {
 			unique: true,
@@ -27,4 +26,30 @@ const userSchema = new Schema({
 	}
 });
 
+const noteSchema = new Schema({
+	user_id: {
+		type: String,
+		required: true
+	},
+	title: {
+		type: String,
+		required: false,
+	},
+	content: {
+		type: String,
+		required: false
+	},
+	created_at: {
+		type: Date,
+		default: Date.now,
+		required: true
+	},
+	updated_at: {
+		type: Date,
+		default: Date.now,
+		required: true
+	}
+});
+
 exports.User = Mongoose.model("user", userSchema);
+exports.Note = Mongoose.model("note", noteSchema);

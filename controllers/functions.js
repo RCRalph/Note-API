@@ -11,13 +11,13 @@ const generateToken = async () => {
 	return token;
 }
 
-const errorResponse = (res, value, msg, param) => {
+const errorResponse = (res, value, msg, param, location = "body") => {
 	return res.status(422).json({
 		errors: [{
 			value,
 			msg,
 			param,
-			location: "body"
+			location
 		}]
 	});
 }
@@ -29,6 +29,17 @@ const hashPassword = password => {
 		.digest("hex");
 }
 
+const getImportantDataFromNoteObject = note => {
+	return {
+		id: note._id,
+		title: note.title,
+		content: note.content,
+		created_at: note.created_at,
+		updated_at: note.updated_at
+	}
+}
+
 exports.generateToken = generateToken;
 exports.errorResponse = errorResponse;
 exports.hashPassword = hashPassword;
+exports.getImportantDataFromNoteObject = getImportantDataFromNoteObject;

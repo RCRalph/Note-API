@@ -5,7 +5,7 @@ module.exports = (app) => {
 	app.post("/login",
 		// Validate request
 		body("email").isEmail().normalizeEmail().isLength({ max: 64 }),
-		body("password").not().isEmpty().isLength({ min: 8, max: 64 }),
+		body("password").notEmpty().isLength({ min: 8, max: 64 }),
 		middleware.checkForErrors,
 
 		require("./user/login")
@@ -14,7 +14,7 @@ module.exports = (app) => {
 	app.post("/register",
 		// Validate request
 		body("email").isEmail().normalizeEmail().isLength({ max: 64 }),
-		body("password").not().isEmpty().isLength({ min: 8, max: 64 }),
+		body("password").notEmpty().isLength({ min: 8, max: 64 }),
 		body("password_confirmation").custom((value, { req }) => {
 			if (value != req.body.password) {
 			  	throw new Error("Given passwords don't match");

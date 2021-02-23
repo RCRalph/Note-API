@@ -18,7 +18,7 @@ Mongoose.connect(process.env.MONGODB_URI, {
 // Add routes
 require("./controllers/routes")(app);
 require("./controllers/user")(app);
-require("./controllers/note")(app);
+require("./controllers/notes")(app);
 
 // Error 404
 app.use((req, res) => res.sendStatus(404));
