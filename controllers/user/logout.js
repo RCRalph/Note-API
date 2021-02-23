@@ -1,7 +1,7 @@
 const DB = require("../db");
 
 module.exports = async (req, res) => {
-	DB.User.findOneAndUpdate({ token: req.body.token }, { token: null }, {
+	await DB.User.findByIdAndUpdate(res.locals.user._id, { token: null }, {
 		useFindAndModify: false
 	});
 

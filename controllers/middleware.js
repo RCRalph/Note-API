@@ -16,7 +16,9 @@ const checkForErrors = (req, res, next) => {
 }
 
 const verifyToken = async (req, res, next) => {
-	if (!await DB.User.exists({ token: req.body.token })) {
+	res.locals.user = await DB.User.findOne({ token: req.body.token });
+
+	if (!res.locals.user) {
 		errorResponse(
 			res,
 			req.body.token,
