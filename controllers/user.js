@@ -15,9 +15,9 @@ module.exports = (app) => {
 		// Validate request
 		body("email").isEmail().normalizeEmail().isLength({ max: 64 }),
 		body("password").not().isEmpty().isLength({ min: 8, max: 64 }),
-		body("password-confirmation").custom((value, { req }) => {
+		body("password_confirmation").custom((value, { req }) => {
 			if (value != req.body.password) {
-			  	throw new Error('Password confirmation does not match password');
+			  	throw new Error("Given passwords don't match");
 			}
 			return true;
 		}),
@@ -27,11 +27,17 @@ module.exports = (app) => {
 	);
 
 	app.post("/logout",
-		// Validate request
-		body("token").not().isEmpty(),
-		middleware.checkForErrors,
-
 		middleware.verifyToken,
 		require("./user/logout")
 	);
+
+	app.post("/update",
+		middleware.verifyToken,
+		require("./user/update")
+	)
+
+	app.post("/delete",
+		middleware.verifyToken,
+		require("./user/delete")
+	)
 }

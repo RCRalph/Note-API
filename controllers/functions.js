@@ -1,4 +1,5 @@
 const DB = require("./db");
+const Crypto = require("crypto");
 const cryptoRandomString = require("crypto-random-string");
 
 const generateToken = async () => {
@@ -21,5 +22,13 @@ const errorResponse = (res, value, msg, param) => {
 	});
 }
 
+const hashPassword = password => {
+	return Crypto
+		.createHash("sha256")
+		.update(password, "binary")
+		.digest("hex");
+}
+
 exports.generateToken = generateToken;
 exports.errorResponse = errorResponse;
+exports.hashPassword = hashPassword;
