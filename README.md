@@ -1,7 +1,7 @@
 Welcome to the repository. Have a good day.
 
 # Setup
-To setup the app, run npm install, set the variables inside .env and run npm start.
+To setup the app, run `npm install`, set the variables inside `.env` and run `npm start`.
 
 ## Variables inside `.env`
 
