@@ -29,14 +29,33 @@ const hashPassword = password => {
 		.digest("hex");
 }
 
-const getImportantDataFromNoteObject = note => {
-	return {
+const getImportantDataFromNoteObject = (note, hateoas = false) => {
+	let retObj = {
 		id: note._id,
 		title: note.title,
 		content: note.content,
 		created_at: note.created_at,
 		updated_at: note.updated_at
+	};
+
+	if (hateoas) { 
+		retObj.hateoas = {
+			update: {
+				directory: `/notes/${note.id}`,
+				method: "PATCH"
+			}, 
+			read: {
+				directory: `/notes/${note.id}`,
+				method: "GET"
+			},
+			delete: {
+				directory: `/notes/${note.id}`,
+				method: "DELETE"
+			}
+		}
 	}
+
+	return retObj;
 }
 
 exports.generateToken = generateToken;

@@ -20,5 +20,5 @@ module.exports = async (req, res) => {
 		updated_at: Date.now()
 	}, { useFindAndModify: false });
 
-	return res.json(getImportantDataFromNoteObject(await DB.Note.findById(note._id)));
+	return res.json(getImportantDataFromNoteObject(await DB.Note.findById(note._id), req.body.hateoas));
 }

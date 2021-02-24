@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 	let notes = await DB.Note.find({ user_id: res.locals.user._id }).exec();
 
 	notes.forEach((item, i) => {
-		notes[i] = getImportantDataFromNoteObject(item);
+		notes[i] = getImportantDataFromNoteObject(item, req.body.hateoas);
 	});
 
 	return res.json(notes);

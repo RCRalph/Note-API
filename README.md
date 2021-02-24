@@ -21,3 +21,27 @@ To setup the app, run `npm install`, set the variables inside `.env` and run `np
 | `GET` | `/notes/<ID>` | `token` | Note | Allows the user to retrieve a specific note. |
 | `PATCH` | `/notes/<ID>` | `token`, `title`, `content` | Updated note | Allows the user to update note. |
 | `DELETE` | `/notes/<ID>` | `token` | `msg` | Allows the user to delete a note. Returns confirmation message. |
+
+# HATEOAS support
+Including the `hateoas` attribute set to a truthy value in the body will add the `hateoas` property to the response object, which looks like this:
+
+```json
+{
+	"hateoas": {
+		"update": {
+			"directory": "/notes/6036b9ede95e0d3bd411119f",
+			"method": "PATCH"
+		},
+		"read": {
+			"directory": "/notes/6036b9ede95e0d3bd411119f",
+			"method": "GET"
+		},
+		"delete": {
+			"directory": "/notes/6036b9ede95e0d3bd411119f",
+			"method": "DELETE"
+		}
+	}
+}
+```
+
+Not including this property or setting it to false means that this property will be undefined.

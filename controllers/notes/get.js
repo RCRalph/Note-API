@@ -14,5 +14,5 @@ module.exports = async (req, res) => {
 		)
 	}
 
-	return res.json(getImportantDataFromNoteObject(note));
+	return res.json(getImportantDataFromNoteObject(note, req.body.hateoas));
 }
